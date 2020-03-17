@@ -1,0 +1,509 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* 上方列 */
+.head{
+    display: flex;
+    height: 80px;
+    border-bottom: 1px solid #aaa;;
+    position: relative;
+}
+.account{
+    /* background-color: #aaa; */
+    position: absolute;
+    top: 35px;
+    left: 150px;
+}
+.account a{
+    font-size: 16px;
+    text-decoration: none;
+    color: black;
+}
+.headicon{
+    /* background-color: #ccc; */
+    display: flex;
+    position: absolute;
+    bottom:20px;
+    right: 150px;
+}
+.headicon [class^="ic"]{
+    margin: 0px 20px;
+}
+
+/* 懸浮視窗 */
+.wrap_main{
+    display: flex;
+    height: 175px;
+    background-color: white;
+    position: sticky;
+    top:0;
+    z-index: 10;
+}
+.wrap_left{
+    position: absolute;
+    top:70px;
+    left: 150px;
+}
+.wrap_left a{
+    /* display: inline-block; */
+    text-decoration: none;
+    font-size: 18px;
+    color: black;
+    margin-top: 5px;
+}
+.wrap_right{
+    position: absolute;
+    top:100px;
+    right: 150px;
+}
+.right_menu a{
+    text-decoration: none;
+    font-size: 16px;
+    padding: 0 10px;
+    color: black;
+}
+
+/* 野莓區塊 */
+.berry{
+    display: flex;
+    height: 500px;
+    /* position: relative; */
+}
+.berry_pic img{
+    width: 100%;
+    height: 100%;
+}
+.berry_text{
+    width: 600px;
+    margin: 30px 0 0 20px;
+    display: flex;
+    flex-direction: column;
+}
+.berry_text p{
+    font-size: 80px;
+    margin: 5px 0px; 
+}
+.berry_text h3{
+    font-size: 50px;
+    color: #ffe605;
+    margin: 5px 0px;
+}
+.bt_readmore{
+    background-color: #000;
+    color: white;
+    width: 200px;
+    height: 60px;
+    margin: 30px 0px;
+    text-align: center;
+    border-radius: 10px;
+    font-size: 24px;
+    line-height: 2.5;
+}
+.bt_readmore:hover{
+    background-color: #ffe605;
+    color: black;
+}
+
+/* 中間空區 */
+.slider_border{
+    /* background-color: #aaa; */
+    height: 50px;
+    border-bottom: 1px solid #aaa;
+}
+
+/* 6個圖片 */
+.sixpic{
+    display: flex;
+    /* width: 1200px;
+    height: 300px;
+    position: relative; */
+    margin: auto;
+}
+.item{
+    width: 240px;
+    height: 240px;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+    margin: 0 5px 0;
+}
+.itme img{
+    width: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: space-around;
+}
+.item p{
+    font-weight: bold;
+    font-size: 20px;
+    position: absolute;
+    top: 180px;
+}
+.item:hover{
+    border: 1px solid #aaa;
+    box-shadow:2px 2px 2px 2px #aaa;
+    transition: .5s;
+    cursor: pointer;
+}  
+.item:hover p{
+    color: #ffe605;
+}  
+
+/* 三張圖片 */
+.threepic{
+    position: relative;
+    display: flex;
+    /* background-color: red; */
+    margin: auto;
+    margin-left: 75px;
+
+}
+.left_pic{
+    position: relative;
+    margin: 15px 40px 15px 80px;
+}
+.left_text{
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
+    color: white;
+    font-size: 30px;
+    line-height: 2.5;
+}
+.threepic a{
+    color: white;
+    margin: 100px 0 10px 0;
+    font-size: 20px;
+}
+.right_pic{
+    position: relative;
+    margin: 15px 80px 15px 40px;  
+}
+.right_pic img{
+    margin: 0 0 20px;
+}
+.right_top_text{
+    position: absolute;
+    top: 150px;    
+}
+.right_bottom_text{
+    position: absolute;
+    top: 500px;
+}
+.right_top_text{
+    position: absolute;
+    bottom: 30px;
+    left: 40px;
+    color: white;
+    font-size: 30px;
+    line-height: 1.5;
+}
+.right_bottom_text{
+    position: absolute;
+    bottom: 80px;
+    left: 30px;
+    color: white;
+    line-height: 2;
+    font-size: 30px;
+}
+.right_text_bottom div p{
+    font-size: 20px;
+}
+
+/* 咖啡罐區四張圖 */
+.Featured_Products h2{
+    /* width: 1200px; */
+    margin: auto;
+    text-align: center;
+    position: relative;
+}
+.bt{
+    /* background-color: red; */
+    position: relative;
+    height: 50px;
+    padding: 20px 0;
+}
+.left_button{
+    position: absolute;
+    top: 20px;
+    right: 250px;
+    border: 1px solid #eee;
+    padding: auto;
+    font-size: 30px;
+}
+.right_button{
+    position: absolute;
+    top: 20px;
+    right: 180px;
+    border: 1px solid #eee;
+    padding: auto;
+    font-size: 30px;
+}
+.left_button:hover,
+.right_button:hover{
+    background-color: yellow;
+    color: white;
+}
+.Products{
+    display: flex;
+    margin: 0 100px;
+}
+.products_item{
+    margin: auto;
+}
+.products_item img{
+    background-color: #eee;
+}
+.products_item a{
+    display: block;
+    text-align: left;
+    font-size: 18px;
+    padding: 5px 5px;
+    font-weight: bold;
+    color: black;
+    text-decoration: none;
+    padding: 5px 5px;
+}
+.products_item p{
+    font-size: 18px;
+    padding: 5px 5px;
+}
+.products_item span{
+    text-decoration: line-through;
+}
+.products_item a:hover,
+.products_item p:hover
+{
+    color: yellow;
+    cursor: pointer;
+}
+
+.products_icon{
+    display: flex;
+}
+.add_to_cart{
+    display: flex;
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px 0 0;
+    margin: 10px;
+    font-size: 18px;
+}
+.add_to_cart p{
+    padding: 0px 5px ;
+}
+.eye{
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px 10px;
+    margin: 10px;
+    font-size: 18px;
+}
+.like{
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px 10px;
+    margin: 10px;
+    font-size: 18px;
+    
+}
+.add_to_cart:hover,
+.eye:hover,
+.like:hover
+{
+    background-color: yellow;
+    border: none;
+    cursor: pointer;
+}
+
+/* 藍莓區 */
+.blueBerry{
+    /* width: 1200px; */
+    margin: auto;
+    height: 650px;
+    /* text-align: center; */
+    position: relative;
+    margin-top: 150px;
+}
+.blueBerry .photo{
+    position: absolute;
+    top: 100px;
+    left: 450px;
+    z-index: -5;
+}
+.blueBerry .sale{
+    width: 600px;
+    height: 400px;
+    background-color: #fff;
+    position: relative;
+    top: 0px;
+    left: 150px;
+    /* margin-top: 0px;
+    margin-left: 0px; */
+    box-shadow: 0px 2px 2px 2px #ccc;
+}
+.blueBerry .sale h1{
+    position: absolute;
+    text-align: center;
+    font-size: 80px;
+    font-weight: bold;
+    font-family: Lato, sans-serif;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    top: 80px;
+}
+.blueBerry .sale p{
+    position: absolute;
+    text-align: center;
+    font-size: 90px;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+    top: 160px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.blueBerry .sale a{
+    background-color: yellow;
+    border: none;
+    width: 140px;
+    height: 30px;
+    border-radius: 5px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    padding: 15px 0 0;
+    bottom: -250px;
+    text-decoration: none;
+}
+.blueBerry .sale a:hover{
+    background-color:black;
+    color: white;
+    cursor: pointer;
+}
+
+/* 圖片四格區 */
+.onsale {
+    width: 1200px;
+    margin-top: 50px;
+    margin-left: 150px;
+    display: flex;
+    /* position: relative; */
+}
+.onsale .left{
+    position: relative;
+}
+.onsale .left .txt{
+    position: absolute;
+    bottom: 100px;
+    left: 50px;
+}
+.onsale .left .txt h3{
+    color: white;
+    font-size: 40px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.onsale .left .txt a{
+    color: white;
+    font-size: 18px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-top: 20px;
+}
+.onsale .left .txt a:hover{
+    color: black;
+    cursor: pointer;
+}
+.onsale .right{
+    position: relative;
+    height: 600px;
+    margin: 0 0 0 50px;
+    justify-content: space-between;
+}
+.onsale .right h1{
+    text-align: center;
+    font-weight: bold;
+    margin: 30px 0;
+}
+.onsale .right .products_item{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 80px 0;
+}
+/* post區 */
+.Featured_Posts {
+    /* width: 1200px; */
+    margin: auto;
+    position: relative;
+}
+.posts_title h3{
+    margin: 100px 0px 50px;
+    text-align: center;
+    font-size: 25px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.posts{
+    display: flex;
+    position: relative;
+    margin-left: 150px;
+}
+.post_item{
+    width: 400px;
+    margin: 10px;
+}
+.post_item h3{
+    font-size: 15px;
+    margin: 10px 0 10px 0;
+    opacity: .7;
+}
+.post_item h2{
+    font-size: 16px;
+    margin: 10px 0 10px 0;
+}
+.post_item p{
+    width: 350px;
+    line-height: 1.5;
+    opacity: .7;
+}
+
+/* 底下選單 */
+.footer{
+    display: flex;
+    justify-content: space-around;
+    background-color:#f9f9f9;
+    position: relative;
+    width: 100%;
+    height: 350px;
+}
+.footer a{
+    color: black;
+    text-decoration: none;    
+    line-height: 3;
+}
+.footer a:hover{
+    color: yellow;
+    cursor: pointer;
+}
+.info {
+    position: relative;
+    line-height: 2;
+}
+
+/* 底下橫條 */
+.end{
+    width: 100%;
+    text-align: center;
+    background-color: yellow;
+    padding: 20px;
+    align-items: center;
+}
