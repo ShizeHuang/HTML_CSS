@@ -1,0 +1,184 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+a:hover{
+    text-decoration: none;
+}
+
+#head {
+    display: flex;
+    justify-content: space-between;
+    padding: 0px;
+    max-width: 1200px;
+}
+
+.body {
+    position: relative;
+}
+
+.currency {
+    position: relative;
+
+    span {
+        display: flex;
+        align-items: center;
+    }
+}
+
+// .dropdown {
+//     position: absolute;
+// }
+
+.shopcar {
+    display: flex;
+    align-items: center;
+
+    i {
+        margin-right: 20px;
+        margin-left: 20px;
+    }
+}
+
+.menu_icon {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 20px;
+}
+
+.menu_icon i {
+    margin: 0 5px 0;
+    color: gray;
+}
+
+@media screen and (max-width: 996px){
+    .menu_icon {
+        justify-content: center;
+    }
+}
+@media screen and (max-width: 768px){
+    .img_item{
+        p{
+            display: none;
+        }
+        h3{
+            display: none;
+        }
+    }
+}
+
+
+.img_item{
+    position: relative;
+    h3{
+        color: white;
+        position: absolute;
+        top: 10%;
+        left: 5%;
+        font-size: 30px;
+        max-width: 540px;
+    }
+    p{
+        max-width: 410px;
+        position: absolute;
+        color: white;
+        bottom: 5%;
+        right: 5%;
+    }
+}
+
+.menu_bar {
+    position: sticky;
+    top: 0px;
+    border-bottom: .5px solid #eee;
+    background-color: #fff;
+    z-index: 2;
+}
+
+.breadcrumb {
+    background-color: #fff;
+    a {
+        color: black;
+        margin: 20px 10px;
+        font-weight: 600;
+    }
+}
+
+.img_item {
+    position: relative;
+    width: 100%;
+    img {
+        width: 100%;
+    }
+}
+
+
+.container{
+    max-width: 1200px;
+}
+
+.blue{
+    color: #7dd0dc;
+}
+.purple{
+    color: #d4bcb5;
+}
+.pink{
+    color: #ffa396;
+}
+
+#slogan{
+    a{
+        padding: 35px 0;
+        h3{
+            font-size: 40px;
+            text-align:center;
+            font-weight: normal;
+        }
+        p{
+            text-align:center;
+        }
+    }
+}
+
+#hair_img{
+    position: relative;
+    div{
+        // width: 100%;
+        position: relative;
+        img{
+            height: 498px;
+            object-fit:none;
+        }
+    }
+    .text{
+        position: absolute;
+        right: 0;
+        top: 30%;
+        justify-content:flex-end;
+        align-items: right;
+        h1{
+            font-weight: 1000;
+            font-size: 80px;
+            color: white;
+        }
+        p:nth-child(2){
+            color: black;
+            font-size: 80px;
+        }
+        p:nth-child(3){
+            font-size: 30px;
+            color: black;
+        }
+        a{
+            color: black;
+            border: 5px solid black;
+        }
+    }
+}
+
+.goods{
+    max-width: 1200px;
+}
