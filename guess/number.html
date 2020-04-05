@@ -30,10 +30,7 @@
             margin-bottom: 10px;
             align-self: center;
         }
-        .num{
-            display: flex;
-            /* width: 100%; */
-        }
+
         .btn{
             width: 100%;
             height: 50px;
@@ -48,20 +45,53 @@
         <button onclick="random()" class="num_bt">產生數字</button>
         <input type="text" id="input_text">
 
-        <div class="num">
-            <button onclick="GetNum(this)" type="button" class="btn" name="num">1</button>
-            <button onclick="GetNum(this)" type="button" class="btn" name="num">2</button>
-            <button onclick="GetNum(this)" type="button" class="btn" name="num">3</button>
-            <button onclick="GetNum(this)" type="button" class="btn" name="num">4</button>
-            <button onclick="GetNum(this)" type="button" class="btn" name="num">5</button>
-            <button onclick="GetNum(this)" type="button" class="btn" name="num">6</button>
-            <button onclick="GetNum(this)" type="button" class="btn" name="num">7</button>
-            <button onclick="GetNum(this)" type="button" class="btn" name="num">8</button>
-            <button onclick="GetNum(this)" type="button" class="btn" name="num">9</button>
-            <button onclick="GetNum(this)" type="button" class="btn" name="num">0</button>
-            <button onclick="clean()" type="button" class="btn">X</button>
-            <button onclick="check()" type="button" class="btn">V</button>
-        </div>
+        <table class="num">
+            <tr>
+                <td>
+                    <button onclick="GetNum(this)" type="button" class="btn" name="num">1</button>
+                </td>
+                <td>
+                    <button onclick="GetNum(this)" type="button" class="btn" name="num">2</button>
+                </td>
+                <td>
+                    <button onclick="GetNum(this)" type="button" class="btn" name="num">3</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button onclick="GetNum(this)" type="button" class="btn" name="num">4</button>
+                </td>
+                <td>
+                    <button onclick="GetNum(this)" type="button" class="btn" name="num">5</button>
+                </td>
+                <td>
+                    <button onclick="GetNum(this)" type="button" class="btn" name="num">6</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button onclick="GetNum(this)" type="button" class="btn" name="num">7</button>
+                </td>
+                <td>
+                    <button onclick="GetNum(this)" type="button" class="btn" name="num">8</button>
+                </td>
+                <td>
+                    <button onclick="GetNum(this)" type="button" class="btn" name="num">9</button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button onclick="clean()" type="button" class="btn">X</button>
+                </td>
+                <td>
+                    <button onclick="GetNum(this)" type="button" class="btn" name="num">0</button>
+                </td>
+                <td>
+                    <button onclick="check()" type="button" class="btn">V</button>
+                </td>
+            </tr>
+        </table>
+
     </div>
     
 
@@ -84,6 +114,10 @@
         function random() {
             randomNum = Math.floor(Math.random() * 100);
             console.log(randomNum);
+            alert("新密碼已產生，現在可以開始終極密碼了!!");
+            max = 100,
+            min = 0;
+            view_text.value = `${min}~${max}`;
         };
 
         function clean() {
@@ -93,6 +127,9 @@
         function check() {
             var guess = input_text.value;
             console.log(guess);
+            if(guess > max || guess < min){
+                alert("ERROR!!請輸入範圍內的數字");
+            }
             if (randomNum == guess) {
                 view_text.value = `答對了!!答案是${randomNum}`;
                 console.log(view_text);
@@ -106,6 +143,7 @@
                 }
                 view_text.value = `${min}~${max}`;
             }
+            input_text.value = '';
         };
     </script>
 </body>
