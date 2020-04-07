@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+    <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+    <style>
+        button{
+            width: 100%;
+            height: 50px;
+            margin: 5px;
+        }
+        .col-md-6{
+            padding: 0px;
+        }
+        .col-6{
+            padding: 0px;
+        }
+        .col-3{
+            padding: 0px;
+        }
+    </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-6 align-self-center">
+                    <div class="view">
+                        <input type="text" class="w-100" style="height:50px; text-align: right; font-size: 30px;" id="input">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <button onclick="AC()">AC</button>
+                        </div>
+                        <div class="col-6">
+                            <button onclick="DEL()">DEL</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <button onclick="getNum(this)">7</button>
+                        </div>
+                        <div class="col-3">
+                            <button onclick="getNum(this)">8</button>
+                        </div>
+                        <div class="col-3">
+                            <button onclick="getNum(this)">9</button>
+                        </div>
+                        <div class="col-3">
+                            <button onclick="Divide()">/</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <button onclick="getNum(this)">4</button>
+                        </div>
+                        <div class="col-3">
+                            <button onclick="getNum(this)">5</button>
+                        </div>
+                        <div class="col-3">
+                            <button onclick="getNum(this)">6</button>
+                        </div>
+                        <div class="col-3">
+                            <button onclick="Times()">*</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <button onclick="getNum(this)">1</button>
+                        </div>
+                        <div class="col-3">
+                            <button onclick="getNum(this)">2</button>
+                        </div>
+                        <div class="col-3">
+                            <button onclick="getNum(this)">3</button>
+                        </div>
+                        <div class="col-3">
+                            <button onclick="getNum(this)">-</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            <button onclick="getNum(this)">.</button>
+                        </div>
+                        <div class="col-3">
+                            <button onclick="getNum(this)">0</button>
+                        </div>
+                        <div class="col-3">
+                            <button onclick="Equals()">=</button>
+                        </div>
+                        <div class="col-3">
+                            <button onclick="Plus()">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <script>
+            var input=document.getElementById('input');
+            var num1,num2,sum,operator;
+
+            function AC(){
+                input.value = '';
+            };
+            function DEL(){
+                input.value = input.value.substr(0, input.value.length-1);
+            };
+
+            function getNum(num) {
+                input.value += num.innerText;
+            };
+
+            function Plus(){
+
+            }
+
+            function Minus(){
+
+            }
+
+            function Times(){
+
+            }
+
+            function Divide(){
+
+            }
+
+            function Equals(){
+                var total=input.value;
+                console.log(typeof total);
+                var a = parseInt(total);
+                console.log(typeof a);
+                console.log(a);
+            }
+
+
+        </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    </body>
+</html>
