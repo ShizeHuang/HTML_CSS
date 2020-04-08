@@ -53,7 +53,7 @@
                             <button onclick="getNum(this)">9</button>
                         </div>
                         <div class="col-3">
-                            <button onclick="Divide()">/</button>
+                            <button onclick="getNum(this)">/</button>
                         </div>
                     </div>
                     <div class="row">
@@ -67,7 +67,7 @@
                             <button onclick="getNum(this)">6</button>
                         </div>
                         <div class="col-3">
-                            <button onclick="Times()">*</button>
+                            <button onclick="getNum(this)">*</button>
                         </div>
                     </div>
                     <div class="row">
@@ -95,7 +95,7 @@
                             <button onclick="Equals()">=</button>
                         </div>
                         <div class="col-3">
-                            <button onclick="Plus()">+</button>
+                            <button onclick="getNum(this)">+</button>
                         </div>
                     </div>
                 </div>
@@ -119,28 +119,25 @@
                 input.value += num.innerText;
             };
 
-            function Plus(){
+            // function Plus(){
 
-            }
+            // }
 
-            function Minus(){
+            // function Minus(){
 
-            }
+            // }
 
-            function Times(){
+            // function Times(){
 
-            }
+            // }
 
-            function Divide(){
+            // function Divide(){
 
-            }
+            // }
 
             function Equals(){
-                var total=input.value;
-                console.log(typeof total);
-                var a = parseInt(total);
-                console.log(typeof a);
-                console.log(a);
+                var ans=eval(input.value);
+                input.value=ans;
             }
 
 
