@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+    <script src="../Modules/MyHelper.js"></script>
+</head>
+
+<body>
+    <h1>Taiwan ZipCode</h1>
+
+    <template id="templateTitle">
+        <tr>
+            <th>縣市</th>
+            <th>區域</th>
+            <th>郵遞區號</th>
+        </tr>
+    </template>
+
+    <template id="templateRow">
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </template>
+
+    <script>
+        let zipcodeArray = '';
+        window.onload = function () {
+            let xhr = new XMLHttpRequest;
+            xhr.onload = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    zipcodeArray = JSON.parse(this.responseText);
+
+                    //陣列重建
+                    let ZipCode = [];
+                    zipcodeArray.forEach((item) => {
+                        let a = [];
+                        item.AreaList.forEach((i) => {
+                            a.push({
+                                "District": i.AreaName,
+                                "ZipCode": i.ZipCode
+                            });
+                        })
+                        ZipCode.push({
+                            "City": (item.CityName),
+                            "Districts": (a)
+                        });
+                    });
+
+                    addThead();
+                    ZipCode.forEach(item => {
+                        addTbody(item);
+                        // console.log(item);
+                    })
+                    // console.log(ZipCode.item);
+                } else {
+                    msg.textContent = '發生錯誤，HTTP response代碼：' + xhr.status;
+                }
+            }
+            xhr.open("GET", 'http://127.0.0.1:5500/TaiwanAddress/TaiwanAddress.json');
+            xhr.send();
+        }
+
+        /*  陣列重建老師的方法
+            let ZipCode=[];
+            zipcodeArray.forEach((item,index) => {
+                let _city=item.CityName;
+                let _districts=[];
+                item.AreaList.forEach((item,index)=>{
+                    _districts.push({ District: item.AreaName, ZipCode: item.ZipCode});
+                });
+                let _cityObject={ City:_city, Districts:_districts};
+                ZipCode.push(_cityObject);
+            });
+        */
+
+        let body = $g('body');
+        let table = $c('table');
+        table.setAttribute('border', '2');
+        // table.setAttribute("style", "border:3px red solid");
+        body.appendChild(table);
+        let thead = $c('thead');
+        let tbody = $c('tbody');
+        table.appendChild(thead);
+        table.appendChild(tbody);
+
+        function addThead() {
+            let templateTitle = $g('#templateTitle');
+            let cloneContent = templateTitle.content.cloneNode(true);
+            thead.appendChild(cloneContent);
+        };
+
+        function addTbody(rowArray) {
+            if (rowArray.City == '桃園市') {
+                rowArray.Districts.forEach(item => {
+                    let templateRow = $g('#templateRow');
+                    let cloneContent = templateRow.content.cloneNode(true);
+                    let tds = cloneContent.querySelectorAll('td');
+
+                    tds[0].textContent = rowArray.City;
+                    tds[1].textContent = item.District;
+                    tds[2].textContent = item.ZipCode;
+
+                    tbody.appendChild(cloneContent);
+                });
+            }
+        }
+    </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>

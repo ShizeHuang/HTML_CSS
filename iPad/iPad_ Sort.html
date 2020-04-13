@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Hello, iPad!</title>
+    <style>
+    </style>
+</head>
+
+<body>
+    <table class="table table-dark table-bordered">
+        <thead>
+            <tr>
+                <th scope="col" class="text-center" onclick="sort('sku')">型號</th>
+                <th scope="col" class="text-center" onclick="sort('price')">價錢</th>
+                <th scope="col" class="text-center" onclick="sort('storage')">容量</th>
+                <th scope="col" class="text-center">說明</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        var iPad=[
+            {
+                "sku": "MW762",
+                "price": 10900,
+                "storage": "32GB",
+                "description": "10.2 吋 iPad Wi-Fi 機型 32GB - 金色"
+            },
+            {
+                "sku": "MW792",
+                "price": 13900,
+                "storage": "128GB",
+                "description": "10.2 吋 iPad Wi-Fi 機型 128GB - 金色"
+            },
+            {
+                "sku": "MW742",
+                "price": 10900,
+                "storage": "32GB",
+                "description": "10.2 吋 iPad Wi-Fi 機型 32GB - 太空灰色"
+            },
+            {
+                "sku": "MW772",
+                "price": 13900,
+                "storage": "128GB",
+                "description": "10.2 吋 iPad Wi-Fi 機型 128GB - 太空灰色"
+            },
+            {
+                "sku": "MW752",
+                "price": 10900,
+                "storage": "32GB",
+                "description": "10.2 吋 iPad Wi-Fi 機型 32GB - 銀色"
+            },
+            {
+                "sku": "MW782",
+                "price": 13900,
+                "storage": "128GB",
+                "description": "10.2 吋 iPad Wi-Fi 機型 128GB - 銀色"
+            },
+            {
+                "sku": "MW6D2",
+                "price": 15400,
+                "storage": "32GB",
+                "description": "10.2 吋 iPad Wi-Fi + 行動網路機型 32GB - 金色"
+            },
+            {
+                "sku": "MW6G2",
+                "price": 18400,
+                "storage": "128GB",
+                "description": "10.2 吋 iPad Wi-Fi + 行動網路機型 128GB - 金色"
+            },
+            {
+                "sku": "MW6A2",
+                "price": 15400,
+                "storage": "32GB",
+                "description": "10.2 吋 iPad Wi-Fi + 行動網路機型 32GB - 太空灰色"
+            },
+            {
+                "sku": "MW6E2",
+                "price": 18400,
+                "storage": "128GB",
+                "description": "10.2 吋 iPad Wi-Fi + 行動網路機型 128GB - 太空灰色"
+            },
+            {
+                "sku": "MW6C2",
+                "price": 15400,
+                "storage": "32GB",
+                "description": "10.2 吋 iPad Wi-Fi + 行動網路機型 32GB - 銀色"
+            },
+            {
+                "sku": "MW6F2",
+                "price": 18400,
+                "storage": "128GB",
+                "description": "10.2 吋 iPad Wi-Fi + 行動網路機型 128GB - 銀色"
+            }
+        ];
+        let tbody=document.getElementsByTagName('tbody')[0];
+
+        iPad.forEach(item => {
+            addTbody(Object.values(item));
+        });
+
+        function addTbody(rowArray){
+            let tr=document.createElement('tr');
+            tbody.appendChild(tr);
+
+            rowArray.forEach(item => {
+                let td = document.createElement('td');               
+                console.log(typeof item);
+                td.innerHTML = item;
+                td.setAttribute("class","text-center")
+                tr.appendChild(td);
+            });
+        };
+    
+        function sort(el){
+            let sortResult=iPad.sort(function(a,b){
+                {
+                    // 由小到大
+                    if(a[el]>=b[el])
+                    {
+                        return 1;
+                    }else{
+                        return -1;
+                    }
+                    return a[el]-b[el];
+                }
+                // else
+                // {
+                //     if(a[el]<=b[el])
+                //     {
+                //         return 1;
+                //     }else{
+                //         return -1;
+                //     }
+                //     return a[el]-b[el];
+                // }
+            });
+
+            tbody.innerHTML='';
+            sortResult.forEach(item=>{
+                addTbody(Object.values(item));
+            })
+        };
+
+
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>

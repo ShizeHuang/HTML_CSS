@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1>Apple iPad</h1>
+    <div id="msg"></div>
+
+    <script>
+        /*         const employees = [
+            { name: "David", age: 35, height: 170, weight: 60 },
+            { name: "Mary", age: 22, height: 172, weight: 52 },
+            { name: "John", age: 18, height: 178, weight: 70 },
+            { name: "Cindy", age: 26, height: 168, weight: 50 }
+        ]; */
+
+        var body = document.getElementsByTagName('body')[0];
+        var table = document.createElement('table');
+        table.setAttribute("border", "2");
+        body.appendChild(table);
+
+        let thead = document.createElement('thead');
+        let tbody = document.createElement('tbody');
+        table.appendChild(thead);
+        table.appendChild(tbody);
+
+        var ipad = '';
+        window.onload = function () {
+
+            let xhr = new XMLHttpRequest;
+            xhr.onload = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    // msg.textContent = this.responseText;
+                    ipad = JSON.parse(this.responseText);
+                    // debugger;
+                    /* 非同步，等資料回傳後再執行function */
+                    const titlesArray = Object.keys(ipad.products[0]);
+                    addThead(titlesArray);
+                    ipad.products.forEach(item => {
+                        addTbody(Object.values(item));
+                    });
+                } else {
+                    msg.textContent = '發生錯誤，HTTP response代碼：' + xhr.status;
+                }
+            }
+            xhr.open("GET", 'https://bs-frontend.azurewebsites.net/api/Apple/IPad');
+            /* 
+            GET 的請求應用於從後端取得資料。
+            POST 的請求用於提交資料至後端。
+            PATCH 的請求用於套用資料至後端修改。
+            DELETE 的請求用於刪除後端指定資料。
+            */
+            // xhr.open("POST", '');    
+            // xhr.open("PATCH", '');
+            // xhr.open("DELETE", '');
+            xhr.send();
+        }
+
+
+        /*         
+        employees的資料結構
+        const titlesArray= Object.keys(employees[0]);
+        addThead(titlesArray);
+        employees.forEach(item => {
+            addTbody(Object.values(item));
+        }); 
+        */
+
+        function addThead(titlesArray) {
+            var tr = document.createElement('tr');
+            thead.appendChild(tr);
+
+            titlesArray.forEach(item => {
+                var th = document.createElement('th');
+                th.innerHTML = item;
+                tr.appendChild(th);
+            });
+
+            // for (thead_name in titlesArray[0]) {
+            //     // console.log(thead_name);
+            //     var th = document.createElement('th');
+            //     th.innerHTML = thead_name;
+            //     tr.appendChild(th);
+            // }
+        };
+
+
+        function addTbody(rowArray) {
+            let tr = document.createElement('tr');
+            tbody.appendChild(tr);
+            // console.log(typeof rowArray);
+            // console.log(Array.isArray(rowArray));
+
+            rowArray.forEach(item => {
+                let td = document.createElement('td');
+                console.log(typeof item);
+                td.innerHTML = item;
+                tr.appendChild(td);
+            });
+
+            // for (tbody_text of rowArray) {
+            //     // console.log(Object.keys(tbody_text));
+            //     var tr = document.createElement('tr');
+            //     table.appendChild(tr);
+            //     var sku = document.createElement('td');
+            //     var price = document.createElement('td');
+            //     var storage = document.createElement('td');
+            //     var description = document.createElement('td');
+            //     var picture = document.createElement('td');
+            //     sku.innerHTML = tbody_text.sku;
+            //     price.innerHTML = tbody_text.price;
+            //     storage.innerHTML = tbody_text.storage;
+            //     description.innerHTML = tbody_text.description;
+            //     var img=document.createElement('img');
+            //     img.setAttribute('src',tbody_text.picture);
+            //     img.setAttribute('height','15%');
+            //     tr.appendChild(sku);
+            //     tr.appendChild(price);
+            //     tr.appendChild(storage);
+            //     tr.appendChild(description);
+            //     tr.appendChild(picture);
+            //     picture.appendChild(img);
+            // }
+        };
+    </script>
+
+
+</body>
+
+</html>
