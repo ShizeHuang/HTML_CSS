@@ -133,22 +133,21 @@
 
     function start() {
       var temp; //暫存數字
-      guess.innerHTML=null;
-      if (ans.length != 4) {
-        while (ans.length < 4) {
-          temp = Math.floor(Math.random() * 10);
-          if (!ans.includes(temp)) {
-            ans.push(temp);
-          }
+      guessResult.innerHTML = null;
+      ans = [];
+
+      while (ans.length < 4) {
+        temp = Math.floor(Math.random() * 10);
+        if (!ans.includes(temp)) {
+          ans.push(temp);
         }
-        alert('新的一組數字已生成，可以開始猜數字了!!');
-      } else {
-        alert('已經有一組數字了!!');
       }
+      alert('新的一組數字已生成，可以開始猜數字了!!');
+
     }
 
     function restart() {
-      ans = [];
+      alert(`答案是：${ans}`);
       start();
     }
 
@@ -161,52 +160,52 @@
       var A = 0,
         B = 0;
       let input = document.getElementById('userGuess').value.toString();
-      if(ans.length!=4){
+      if (ans.length != 4) {
         alert("請先開始遊戲!!!再輸入數字");
         return;
       }
       if (input.length != 4) {
         alert("輸入長度不正確!!!");
-        document.getElementById('userGuess').value=null;
+        document.getElementById('userGuess').value = null;
         return;
       }
       for (i = 0; i < 4; i++) {
         for (j = 0; j < i; j++) {
           if (input[i] == input[j]) {
             alert("輸入的數字有重複!!!");
-            document.getElementById('userGuess').value=null;
+            document.getElementById('userGuess').value = null;
             return;
           }
         }
       }
-      for(i=0;i<4;i++){
-        if(ans[i]==input[i]){
+      for (i = 0; i < 4; i++) {
+        if (ans[i] == input[i]) {
           A++;
-        }else{
-          for(j=0;j<4;j++){
-            if(ans[i]==input[j]){
+        } else {
+          for (j = 0; j < 4; j++) {
+            if (ans[i] == input[j]) {
               B++;
             }
           }
         }
       }
 
-      var li=document.createElement('li');
-      li.className="list-group-item";
-      var span =document.createElement('span');
-      span.className="label label-danger";
+      var li = document.createElement('li');
+      li.className = "list-group-item";
+      var span = document.createElement('span');
+      span.className = "label label-danger";
 
-      if(A==4){
-        span.className="label label-success";
+      if (A == 4) {
+        span.className = "label label-success";
         alert(`恭喜你答對了~~ 答案是${ans}`);
       }
 
-      span.innerText=`${A} A ${B} B`;
+      span.innerText = `${A} A ${B} B`;
       li.appendChild(span);
-      li.innerHTML +=` guess=${input}`;
+      li.innerHTML += ` guess=${input}`;
       guessResult.appendChild(li);
 
-      document.getElementById('userGuess').value=null;
+      document.getElementById('userGuess').value = null;
     }
   </script>
 </body>
