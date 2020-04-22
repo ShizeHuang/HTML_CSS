@@ -133,6 +133,7 @@
 
     function start() {
       var temp; //暫存數字
+      guess.innerHTML=null;
       if (ans.length != 4) {
         while (ans.length < 4) {
           temp = Math.floor(Math.random() * 10);
