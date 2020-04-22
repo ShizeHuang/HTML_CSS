@@ -29,8 +29,7 @@
     </table>
 
     <script>
-        var iPad=[
-            {
+        var iPad = [{
                 "sku": "MW762",
                 "price": 10900,
                 "storage": "32GB",
@@ -103,56 +102,65 @@
                 "description": "10.2 吋 iPad Wi-Fi + 行動網路機型 128GB - 銀色"
             }
         ];
-        let tbody=document.getElementsByTagName('tbody')[0];
+        let tbody = document.getElementsByTagName('tbody')[0];
+        var isDesc = false;
 
         iPad.forEach(item => {
             addTbody(Object.values(item));
         });
 
-        function addTbody(rowArray){
-            let tr=document.createElement('tr');
+        function addTbody(rowArray) {
+            let tr = document.createElement('tr');
             tbody.appendChild(tr);
 
             rowArray.forEach(item => {
-                let td = document.createElement('td');               
+                let td = document.createElement('td');
                 console.log(typeof item);
                 td.innerHTML = item;
-                td.setAttribute("class","text-center")
+                td.setAttribute("class", "text-center")
                 tr.appendChild(td);
             });
         };
-    
-        function sort(el){
-            let sortResult=iPad.sort(function(a,b){
-                {
+
+        function sort(el) {
+            let sortResult = iPad.sort(function (a, b) {
+                if (!isDesc) {
                     // 由小到大
-                    if(a[el]>=b[el])
-                    {
+                    if (a[el] >= b[el]) {
                         return 1;
-                    }else{
+                    } else {
                         return -1;
                     }
-                    return a[el]-b[el];
+                    return a[el] - b[el];
+                } else {
+                    if (a[el] <= b[el]) {
+                        return 1;
+                    } else {
+                        return -1;
+                    }
+                    return b[el] - a[el];
                 }
-                // else
-                // {
-                //     if(a[el]<=b[el])
-                //     {
-                //         return 1;
-                //     }else{
-                //         return -1;
-                //     }
-                //     return a[el]-b[el];
-                // }
             });
 
-            tbody.innerHTML='';
-            sortResult.forEach(item=>{
+            //重新顯示資料
+            tbody.innerHTML = '';
+            sortResult.forEach(item => {
                 addTbody(Object.values(item));
             })
+
+
+            if (isDesc) {
+                isDesc = false;
+                // nowIcon.classList.remove('fa-sort');
+                // nowIcon.classList.remove('fa-sort-down');
+                // nowIcon.classList.add('fa-sort-up');
+            } else {
+                isDesc = true;
+                // nowIcon.classList.remove('fa-sort');
+                // nowIcon.classList.remove('fa-sort-up');
+                // nowIcon.classList.add('fa-sort-down');
+            }
         };
-
-
     </script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
