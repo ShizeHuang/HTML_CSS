@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+    <style>
+        table * {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    <button type="button" class="btn btn-primary" onclick="MinMonth()">
+                        < </button> </th> <th colspan="5">
+                            <h1 id="now_month"></h1>
+                </th>
+                <th>
+                    <button type="button" class="btn btn-primary" onclick="AddMonth()"> > </button>
+                </th>
+            </tr>
+            <tr>
+                <th>日</th>
+                <th>一</th>
+                <th>二</th>
+                <th>三</th>
+                <th>四</th>
+                <th>五</th>
+                <th>六</th>
+            </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+
+        <!-- 新增的Modal -->
+        <div class="modal fade" id="Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ModalTitle"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">標題</span>
+                            </div>
+                            <input type="text" class="form-control" id="input_title">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">內容</span>
+                            </div>
+                            <textarea class="form-control" aria-label="With textarea" rows="8"
+                                id="input_context"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" onclick="save()">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 刪除，修改的Modal -->
+        <div class="modal fade" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="ModalTitle2"></h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">標題</span>
+                            </div>
+                            <input type="text" class="form-control" id="input_title2">
+                        </div>
+                        <br>
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">內容</span>
+                            </div>
+                            <textarea class="form-control" aria-label="With textarea" rows="8"
+                                id="input_context2"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                            onclick="delect()">刪除</button>
+                        <button type="button" class="btn btn-primary" onclick="updata()">修改</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </table>
+
+
+
+    <script>
+        var nowDate = new Date()
+
+        var year = nowDate.getFullYear();
+        var month = nowDate.getMonth();
+        var day = nowDate.getDate();
+        var currentindex;
+        Init();
+
+        function Init() {
+            var tbody = document.getElementById('tbody');
+            tbody.innerHTML = '';
+            //重新整理&換月的時候，清空tbody
+
+            //取第一天禮拜幾
+            var firstDay = new Date(year, month, 1).getDay();
+            //取這個月有幾天        
+            var dayOfMonth = new Date(year, month + 1, 0).getDate();
+
+            var now_month = document.getElementById('now_month').innerText =
+                `${new Date(year, month,1).getFullYear()}年${new Date(year, month,1).getMonth()+1}月`;
+
+            var day = 1;
+
+            for (let row = 0; row < 6; row++) {
+                let tr = document.createElement('tr');
+                for (let col = 0; col < 7; col++) {
+                    let td = document.createElement('td');
+
+                    if (row == 0 && col < firstDay) {
+                        //不做事
+                    } else {
+                        if (day <= dayOfMonth) {
+                            td.innerText = day;
+
+                            let now_date =
+                                `${new Date(year, month,1).getFullYear()}/${new Date(year, month,1).getMonth()+1}/${day}`;
+                            td.setAttribute('MyDate', now_date);
+
+                            //長出日期格子td，行程的ul.li
+                            if (localStorage.getItem(now_date) != null) {
+                                console.log('有資料');
+                                let ul = document.createElement('ul');
+                                let local = JSON.parse(localStorage.getItem(now_date));
+                                for (i = 0; i < local.length; i++) {
+                                    let li = document.createElement('li');
+                                    li.innerText = local[i].Title;
+                                    li.setAttribute('index', i);
+                                    li.setAttribute('Date', local[i].Date);
+
+
+                                    li.addEventListener('click', event => {
+                                        currentindex = event.target.getAttributeNode('index').value;
+                                        event.stopPropagation();    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+                                        $('#Modal2').modal('show');
+                                        document.getElementById('ModalTitle2').innerText = event.target
+                                            .getAttributeNode('Date').value;
+                                        document.getElementById('input_title2').value = local[event.target
+                                            .getAttributeNode('index').value].Title;
+                                        document.getElementById('input_context2').innerText = local[event.target
+                                            .getAttributeNode('index').value].Context;
+                                    });
+                                    ul.appendChild(li);     //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                                };
+                                
+                                ul.addEventListener('click', event => {
+                                    event.stopPropagation();
+                                });
+                                td.appendChild(ul);
+                            };
+
+                            //加入td的onclick事件
+                            td.addEventListener('click', function () {
+                                $('#Modal').modal('show');
+                                //console.log(event);
+                                document.getElementById('ModalTitle').innerText = event.target.getAttributeNode(
+                                    'MyDate').value;
+                                document.getElementById('input_title').value='';
+                                document.getElementById('input_context').value='';
+                            });
+                            day++;
+                        }
+                    }
+                    tr.appendChild(td);
+                }
+                tbody.appendChild(tr);
+            }
+        }
+
+        function save() {
+            var array = [];
+            console.log(document.getElementById('ModalTitle').innerText);
+
+            let temp = {
+                Date: `${document.getElementById('ModalTitle').innerText}`,
+                Title: `${document.getElementById('input_title').value}`,
+                Context: `${$("#input_context").val()}`
+            }
+            //判斷localStorage當日有沒有行程
+            if (localStorage.getItem(temp.Date) == null) {
+                // console.log('沒有');
+                array.push(temp);
+                localStorage.setItem(temp.Date, JSON.stringify(array));
+            } else {
+                // console.log('有');
+                let array = JSON.parse(localStorage.getItem(temp.Date));
+                array.push(temp);
+                localStorage.setItem(temp.Date, JSON.stringify(array));
+            }
+            Init();
+        }
+
+        function delect() {
+            let date = document.getElementById('ModalTitle2').innerText;
+            console.log(date);
+            let localarray = JSON.parse(localStorage.getItem(date));
+            let index = currentindex;
+            console.log(localarray);
+            localarray.splice(index, 1);
+            localStorage.setItem(date, JSON.stringify(localarray));
+            if (localarray.length == 0) {
+                localStorage.removeItem(date);
+            }
+            Init();
+        }
+
+        function updata() {
+            let date = document.getElementById('ModalTitle2').innerText;
+            console.log(date);
+            let localarray = JSON.parse(localStorage.getItem(date));
+            let index = currentindex;
+            console.log(localarray);
+            localarray[index].Title = document.getElementById('input_title2').value;
+            localarray[index].Context = document.getElementById('input_context2').value;
+            localStorage.setItem(date, JSON.stringify(localarray));
+            Init();
+        }
+
+        function AddMonth() {
+            month++;
+            Init();
+        }
+
+        function MinMonth() {
+            month--;
+            Init();
+        }
+    </script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>
