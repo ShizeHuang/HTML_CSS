@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <title>英雄聯盟角色資訊</title>
+</head>
+
+<body>
+    <div>
+        <h1 style="text-align: center; padding: 30px 0px;">英雄聯盟角色資訊</h1>
+    </div>
+    <div class="container">
+        <div class="row" id="row">
+
+        </div>
+    </div>
+
+    <div class="modal" id="MyModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header" id="modal_header">
+                    <h5 class="modal-title" id="modal_title"></h5>
+                </div>
+                <div class="modal-body" id="modal_body">
+                    <p class="modal_content"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var LoLArray = '';
+        $.ajax({
+            type: "GET",
+            url: "https://raw.githubusercontent.com/ShizeHuang/FilesStorage/master/League-of-Legends_Roles.json",
+            dataType: 'json',
+            success: function (response) {
+                LoLArray = response;
+                // console.log(LoLArray);
+                LoLArray.forEach(function (item, index) {
+                    context(item, index);
+                });
+            },
+            error: function (response) {
+                console.log("Error")
+            }
+        });
+
+
+        function context(item, index) {
+            // console.log(item);
+            // console.log(index);
+            let img = document.createElement("img");
+            img.src = item.icon;
+            let p = document.createElement("p");
+            p.innerHTML = item.name;
+            let col = document.createElement('col');
+            col.className = 'col text-center hover-color';
+            col.addEventListener('click', function () {
+                $('#MyModal').modal('show');
+                $('#modal_title').text(item.name);
+                let content = document.getElementById('modal_body');
+                content.innerHTML='';
+                //加大圖
+                // let url = item.link.url;
+                // console.log(url);
+                // document.getElementById(modal_header).setAttribute('');
+                // $('#modal_header').css("background-image",url);
+                // console.log(item.stats);
+                for (data in item.stats) {
+                    console.log(item.stats[data]);
+                    let p1 = document.createElement('p');
+                    p1.innerHTML = (`${data}:${item.stats[data]}`);
+                    content.appendChild(p1);
+                }
+            })
+            col.appendChild(img);
+            col.appendChild(p);
+            document.getElementById("row").appendChild(col);
+        }
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>
